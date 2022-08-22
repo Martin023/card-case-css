@@ -18,6 +18,7 @@ body {
     place-items: center;
     line-height: 1.6;
     background: var(--crl-neutral-900);
+   
 }
 
 .card {
@@ -26,18 +27,30 @@ body {
     background-size: cover;
     padding: 10rem 0 0;
     max-width: 35ch;  /* 35 character length wide */
+    border-radius: 0.5rem;
+    overflow:hidden;
+    /* setting the transition delay and style */
+    transition: transform 500ms ease;
+}
+.card:hover{
+    /* scale is for incresing or decreasing size of the item */
+    /* note that scaling affects the display quality though negligible */
+    transform: scale(1.05) ;
 }
 .card-content {
-    padding: 1.5em;
+    
     /* background: hsl(0, 0%, 0% / 0.5); hsl is an alterntive to rgba ie easier to use but may have browser compatibility issues */
     background: linear-gradient(hsl(0, 0%, 0% / 0),
     hsl(255, 0%, 50% / 0.2) 20%,
     hsl(0, 0%, 0% / 1));
-
+    --padding:1rem;/* local scope css variable, you cant use it outside padding. */
+    padding: var(--padding); /*using the variable */
+    /* advantage of using the variale css is that it will work always even if we change padding value */
 }
 .card-title {
     /* we give position attribute to the title so that the following absolute psition will be in respect to it. */
     position: relative;
+    width: max-content;
     /* outline: 1px solid red; shows outline without moving the rest of the objects */
 }
 .card-title::after {
@@ -45,8 +58,29 @@ body {
     content: "";
     position: absolute;
     height: 4px;
-    width: 100%;
+    width: calc(100% + var(--padding));
     background: var(--crl-accent-400);
     bottom: 0;
-    left:0
+
+    left: calc(var(--padding) * -1);
+}
+.card-body {
+    color:rgb(255 255 255 / 0.85);
+}
+.button {
+    cursor: pointer;
+    display: inline-block;
+    color: var(--crl-neutral-900);
+    background-color: var(--crl-accent-400);
+    text-decoration: none;
+    padding: 0.5em 1.25rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem ;
+
+}
+.button:hover,
+.button:focus {
+    background-color: var(--crl-neutral-100);
+
 }
