@@ -46,7 +46,22 @@ body {
     --padding:1rem;/* local scope css variable, you cant use it outside padding. */
     padding: var(--padding); /*using the variable */
     /* advantage of using the variale css is that it will work always even if we change padding value */
+    transform: translateY(65%);
 }
+.card-content > * :not(.card-title) {
+   
+   opacity: 0;
+   transition: opacity 500ms linear;
+}
+.card:hover .card-content {
+    transform: translateY(0);
+    transition: transform 500ms ease; 
+}
+.card:hover .card-content > * {
+    opacity: 1;
+    transition: opacity 500ms linear;
+}
+
 .card-title {
     /* we give position attribute to the title so that the following absolute psition will be in respect to it. */
     position: relative;
@@ -63,21 +78,31 @@ body {
     bottom: 0;
 
     left: calc(var(--padding) * -1);
+    transform: scaleX(0);
+    transform-origin: left;
+    /* or use left*/
+    /* transform-origin: 0 50%;  */
+    /* origin is the point from which the scale will be applied */
+    /* limit your transitions to transformand opacity rather thanwidthto get better prfomsnce/results */
+    transition: transform 500ms ease;
+}
+/* When adding a transform on 2 selector classes */
+.card:hover .card-title::after {
+    transform: scaleX(1);
 }
 .card-body {
     color:rgb(255 255 255 / 0.85);
 }
 .button {
     cursor: pointer;
+    border: none;
     display: inline-block;
     color: var(--crl-neutral-900);
     background-color: var(--crl-accent-400);
     text-decoration: none;
     padding: 0.5em 1.25rem;
     border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    margin-left: 1rem ;
-
+    
 }
 .button:hover,
 .button:focus {
