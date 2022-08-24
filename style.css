@@ -32,7 +32,9 @@ body {
     /* setting the transition delay and style */
     transition: transform 500ms ease;
 }
-.card:hover{
+.card:hover,
+/* card focus within refers to if the item of  focus is within the card */
+.card:focus-within {
     /* scale is for incresing or decreasing size of the item */
     /* note that scaling affects the display quality though negligible */
     transform: scale(1.05) ;
@@ -48,18 +50,21 @@ body {
     /* advantage of using the variale css is that it will work always even if we change padding value */
     transform: translateY(65%);
 }
-.card-content > * :not(.card-title) {
+.card-content > *:not(.card-title) {
    
    opacity: 0;
    transition: opacity 500ms linear;
+   
 }
 .card:hover .card-content {
     transform: translateY(0);
-    transition: transform 500ms ease; 
+    transition: transform 500ms ease;
+    transition-delay :500ms;; 
 }
 .card:hover .card-content > * {
     opacity: 1;
     transition: opacity 500ms linear;
+    transition-delay: 1000ms;
 }
 
 .card-title {
