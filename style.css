@@ -48,23 +48,14 @@ body {
     --padding:1rem;/* local scope css variable, you cant use it outside padding. */
     padding: var(--padding); /*using the variable */
     /* advantage of using the variale css is that it will work always even if we change padding value */
-    transform: translateY(65%);
+    
 }
-.card-content > *:not(.card-title) {
-   
-   opacity: 0;
-   transition: opacity 500ms linear;
-   
-}
-.card:hover .card-content {
-    transform: translateY(0);
-    transition: transform 500ms ease;
-    transition-delay :500ms;; 
-}
-.card:hover .card-content > * {
+
+.card:hover .card-content > * ,
+.card:focus-within .card-content > *  {
     opacity: 1;
     transition: opacity 500ms linear;
-    transition-delay: 1000ms;
+    transition-delay: 100ms;
 }
 
 .card-title {
@@ -83,12 +74,12 @@ body {
     bottom: 0;
 
     left: calc(var(--padding) * -1);
-    transform: scaleX(0);
+    
     transform-origin: left;
     /* or use left*/
     /* transform-origin: 0 50%;  */
     /* origin is the point from which the scale will be applied */
-    /* limit your transitions to transformand opacity rather thanwidthto get better prfomsnce/results */
+    /* limit your transitions to transform and opacity rather thanwidthto get better prfomsnce/results */
     transition: transform 500ms ease;
 }
 /* When adding a transform on 2 selector classes */
@@ -98,6 +89,36 @@ body {
 .card-body {
     color:rgb(255 255 255 / 0.85);
 }
+
+/* For support in mobile devices we adjust the media query */
+/* media hover means a device that can hover if not, the styles wont be implemented */
+@media (hover) {
+    .card-content{
+        transform: translateY(65%);
+        transition-delay: 500ms;
+    }
+    .card-content > *:not(.card-title) {
+   
+        opacity: 0;
+        transition: opacity 500ms linear;
+        
+     }
+     .card:hover .card-content ,
+     .card:focus-within .card-content{
+         transform: translateY(0);
+         transition: transform 500ms ease;
+         transition-delay :500ms;; 
+     }
+     
+     .card:focus-within .card-content {
+         transition-duration: 0ms;
+     }
+     .card-title::after {
+        transform: scaleX(0);
+     }
+}
+
+
 .button {
     cursor: pointer;
     border: none;
